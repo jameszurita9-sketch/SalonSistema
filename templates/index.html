@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SalónSistema</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+
+        /* ==============================
+           ENCABEZADO
+        ============================== */
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 22px;
+        }
+
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+
+        header p {
+            color: #d1d5db;
+        }
+
+
+        /* ==============================
+           CONTENEDOR
+        ============================== */
+
+        .container {
+            width: 94%;
+            max-width: 1400px;
+            margin: 25px auto;
+        }
+
+
+        /* ==============================
+           SECCIONES
+        ============================== */
+
+        .section {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+
+        /* ==============================
+           TARJETAS
+        ============================== */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(210px, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+
+        .card h3 {
+
+            color: #6b7280;
+
+            font-size: 15px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .amount {
+
+            font-size: 28px;
+
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           FORMULARIOS
+        ============================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 16px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+
+        .form-group label {
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            background: white;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            outline: none;
+
+            border-color: #111827;
+        }
+
+
+        /* ==============================
+           BOTONES
+        ============================== */
+
+        button {
+
+            border: none;
+
+            padding: 11px 17px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        .btn-primary {
+
+            background: #111827;
+
+            color: white;
+        }
+
+
+        .btn-secondary {
+
+            background: #e5e7eb;
+
+            color: #111827;
+        }
+
+
+        .btn-danger {
+
+            background: #dc2626;
+
+            color: white;
+        }
+
+
+        .btn-edit {
+
+            background: #374151;
+
+            color: white;
+
+            margin-right: 5px;
+        }
+
+
+        button:hover {
+
+            opacity: 0.85;
+        }
+
+
+        /* ==============================
+           MÉTODOS DE PAGO
+        ============================== */
+
+        .payment-methods {
+
+            display: flex;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            margin-top: 5px;
+        }
+
+
+        .payment-methods label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            cursor: pointer;
+        }
+
+
+        .payment-methods input {
+
+            width: auto;
+        }
+
+
+        /* ==============================
+           MENSAJES
+        ============================== */
+
+        .message {
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-top: 15px;
+
+            display: none;
+        }
+
+
+        .message.success {
+
+            display: block;
+
+            background: #dcfce7;
+
+            color: #166534;
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            background: #fee2e2;
+
+            color: #991b1b;
+        }
+
+
+        /* ==============================
+           TABLAS
+        ============================== */
+
+        .table-container {
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 700px;
+        }
+
+
+        th,
+        td {
+
+            padding: 13px;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            text-align: left;
+        }
+
+
+        th {
+
+            background: #f9fafb;
+
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           FILTROS
+        ============================== */
+
+        .filters {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(180px, 1fr));
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .filter-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            align-items: end;
+        }
+
+
+        .total-filtered {
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* ==============================
+           ENLACES
+        ============================== */
+
+        .top-links {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-top: 20px;
+        }
+
+
+        .top-links a {
+
+            text-decoration: none;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            background: #e5e7eb;
+
+            color: #111827;
+
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           CHECK CLIENTE OCASIONAL
+        ============================== */
+
+        .occasional {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 10px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .occasional input {
+
+            width: auto;
+        }
+
+
+        /* ==============================
+           PIE
+        ============================== */
+
+        footer {
+
+            text-align: center;
+
+            color: #6b7280;
+
+            padding: 25px;
+        }
+
+
+        /* ==============================
+           CELULARES
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+
+                font-size: 23px;
+            }
+
+
+            .container {
+
+                width: 92%;
+            }
+
+
+            .section {
+
+                padding: 18px;
+            }
+
+
+            .amount {
+
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>SalónSistema</h1>
+
+    <p>
+        Sistema de gestión para salón de belleza y barbería
+    </p>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- ==================================================
+         RESUMEN
+    ================================================== -->
+
+    <section class="cards">
+
+
+        <div class="card">
+
+            <h3>Ingresos de hoy</h3>
+
+            <div
+                class="amount"
+                id="totalHoy"
+            >
+                Bs 0.00
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Efectivo de hoy</h3>
+
+            <div
+                class="amount"
+                id="efectivoHoy"
+            >
+                Bs 0.00
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>QR de hoy</h3>
+
+            <div
+                class="amount"
+                id="qrHoy"
+            >
+                Bs 0.00
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Ingresos de la semana</h3>
+
+            <div
+                class="amount"
+                id="totalSemana"
+            >
+                Bs 0.00
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Ingresos del mes</h3>
+
+            <div
+                class="amount"
+                id="totalMes"
+            >
+                Bs 0.00
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PUNTO 9
+         REGISTRAR PAGO
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            💰 Registrar pago
+        </h2>
+
+
+        <form id="formPago">
+
+
+            <div class="form-grid">
+
+
+                <!-- CLIENTE -->
+
+                <div class="form-group">
+
+                    <label for="clientePago">
+                        Cliente
+                    </label>
+
+                    <select id="clientePago">
+
+                        <option value="">
+                            Cliente ocasional
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SERVICIO -->
+
+                <div class="form-group">
+
+                    <label for="servicioPago">
+                        Servicio
+                    </label>
+
+                    <select
+                        id="servicioPago"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccionar servicio
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- MONTO -->
+
+                <div class="form-group">
+
+                    <label for="montoPago">
+                        Monto realmente pagado
+                    </label>
+
+                    <input
+                        type="number"
+                        id="montoPago"
+                        min="0.01"
+                        step="0.01"
+                        required
+                        placeholder="0.00"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CLIENTE OCASIONAL -->
+
+            <label class="occasional">
+
+                <input
+                    type="checkbox"
+                    id="clienteOcasional"
+                    checked
+                >
+
+                Cliente ocasional
+
+            </label>
+
+
+            <!-- MÉTODO DE PAGO -->
+
+            <div class="form-group">
+
+                <label>
+                    Forma de pago
+                </label>
+
+
+                <div class="payment-methods">
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="metodoPago"
+                            value="Efectivo"
+                            checked
+                        >
+
+                        Efectivo
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="metodoPago"
+                            value="QR"
+                        >
+
+                        QR
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <br>
+
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+                Registrar pago
+            </button>
+
+
+            <div
+                id="mensajePago"
+                class="message"
+            ></div>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PUNTO 10
+         CLIENTES
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            👤 Clientes
+        </h2>
+
+
+        <form id="formCliente">
+
+
+            <input
+                type="hidden"
+                id="clienteId"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="clienteNombre"
+                        required
+                        placeholder="Nombre completo"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="text"
+                        id="clienteTelefono"
+                        required
+                        placeholder="Teléfono"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Correo
+                    </label>
+
+                    <input
+                        type="email"
+                        id="clienteEmail"
+                        placeholder="Correo electrónico"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-primary"
+                id="btnGuardarCliente"
+            >
+                Guardar cliente
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                id="btnCancelarCliente"
+                style="display:none;"
+            >
+                Cancelar edición
+            </button>
+
+
+            <div
+                id="mensajeCliente"
+                class="message"
+            ></div>
+
+
+        </form>
+
+
+        <br>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Nombre</th>
+
+                        <th>Teléfono</th>
+
+                        <th>Correo</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaClientes">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PUNTO 11
+         SERVICIOS
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            ✂️ Servicios
+        </h2>
+
+
+        <form id="formServicio">
+
+
+            <input
+                type="hidden"
+                id="servicioId"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Nombre del servicio
+                    </label>
+
+                    <input
+                        type="text"
+                        id="servicioNombre"
+                        required
+                        placeholder="Ej. Corte de cabello"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Precio
+                    </label>
+
+                    <input
+                        type="number"
+                        id="servicioPrecio"
+                        min="0.01"
+                        step="0.01"
+                        required
+                        placeholder="0.00"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-primary"
+                id="btnGuardarServicio"
+            >
+                Guardar servicio
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                id="btnCancelarServicio"
+                style="display:none;"
+            >
+                Cancelar edición
+            </button>
+
+
+            <div
+                id="mensajeServicio"
+                class="message"
+            ></div>
+
+
+        </form>
+
+
+        <br>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Servicio</th>
+
+                        <th>Precio</th>
+
+                        <th>Estado</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaServicios">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PUNTO 12
+         HISTORIAL
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            📋 Historial de pagos
+        </h2>
+
+
+        <div class="filters">
+
+
+            <div class="form-group">
+
+                <label>
+                    Buscar
+                </label>
+
+                <input
+                    type="text"
+                    id="buscarPago"
+                    placeholder="Cliente o servicio"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Cliente
+                </label>
+
+                <select id="filtroCliente">
+
+                    <option value="">
+                        Todos los clientes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Método
+                </label>
+
+                <select id="filtroMetodo">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="Efectivo">
+                        Efectivo
+                    </option>
+
+                    <option value="QR">
+                        QR
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Desde
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaDesde"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Hasta
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaHasta"
+                >
+
+            </div>
+
+
+        </div>
+
+
+        <div class="filter-actions">
+
+            <button
+                class="btn-secondary"
+                type="button"
+                onclick="limpiarFiltros()"
+            >
+                Limpiar filtros
+            </button>
+
+        </div>
+
+
+        <br>
+
+
+        <div
+            class="total-filtered"
+            id="totalFiltrado"
+        >
+            Total: Bs 0.00
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Fecha</th>
+
+                        <th>Cliente</th>
+
+                        <th>Servicio</th>
+
+                        <th>Monto</th>
+
+                        <th>Método</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaPagos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         ENLACES TÉCNICOS
+    ================================================== -->
+
+    <section class="section">
+
+        <h2>
+            Herramientas
+        </h2>
+
+
+        <div class="top-links">
+
+            <a
+                href="/docs"
+                target="_blank"
+            >
+                Swagger / API
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    SalónSistema
+
+</footer>
+
+
+
+<script>
+
+
+/* ======================================================
+   VARIABLES
+====================================================== */
+
+let clientes = [];
+
+let servicios = [];
+
+let pagos = [];
+
+
+
+/* ======================================================
+   FORMATO DE DINERO
+====================================================== */
+
+function dinero(valor) {
+
+    return "Bs " +
+        Number(valor || 0).toFixed(2);
+
+}
+
+
+
+/* ======================================================
+   MENSAJES
+====================================================== */
+
+function mostrarMensaje(elementId, texto, tipo) {
+
+    const elemento =
+        document.getElementById(elementId);
+
+    elemento.textContent = texto;
+
+    elemento.className =
+        "message " + tipo;
+
+}
+
+
+function ocultarMensaje(elementId) {
+
+    const elemento =
+        document.getElementById(elementId);
+
+    elemento.textContent = "";
+
+    elemento.className = "message";
+
+}
+
+
+
+/* ======================================================
+   PUNTO 9
+   CARGAR CLIENTES EN EL SELECT DE PAGOS
+====================================================== */
+
+function cargarClientesEnPago() {
+
+    const select =
+        document.getElementById("clientePago");
+
+    select.innerHTML = "";
+
+
+    const ocasional =
+        document.createElement("option");
+
+    ocasional.value = "";
+
+    ocasional.textContent =
+        "Cliente ocasional";
+
+    select.appendChild(ocasional);
+
+
+    clientes.forEach(function(cliente) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = cliente.id;
+
+        option.textContent =
+            cliente.name;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+/* ======================================================
+   PUNTO 9
+   CARGAR SERVICIOS EN EL SELECT DE PAGOS
+====================================================== */
+
+function cargarServiciosEnPago() {
+
+    const select =
+        document.getElementById("servicioPago");
+
+    select.innerHTML = "";
+
+
+    const inicial =
+        document.createElement("option");
+
+    inicial.value = "";
+
+    inicial.textContent =
+        "Seleccionar servicio";
+
+    select.appendChild(inicial);
+
+
+    servicios.forEach(function(servicio) {
+
+        if (servicio.active === false) {
+            return;
+        }
+
+
+        const option =
+            document.createElement("option");
+
+        option.value = servicio.id;
+
+        option.textContent =
+            servicio.name +
+            " - " +
+            dinero(servicio.price);
+
+        option.dataset.precio =
+            servicio.price;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+/* ======================================================
+   PUNTO 9
+   PRECIO AUTOMÁTICO
+====================================================== */
+
+document
+    .getElementById("servicioPago")
+    .addEventListener("change", function() {
+
+        const option =
+            this.options[this.selectedIndex];
+
+        if (!option) {
+            return;
+        }
+
+
+        const precio =
+            option.dataset.precio;
+
+
+        if (precio) {
+
+            document
+                .getElementById("montoPago")
+                .value =
+                Number(precio).toFixed(2);
+
+        }
+
+    });
+
+
+
+/* ======================================================
+   PUNTO 9
+   CLIENTE OCASIONAL
+====================================================== */
+
+document
+    .getElementById("clienteOcasional")
+    .addEventListener("change", function() {
+
+        const select =
+            document.getElementById("clientePago");
+
+
+        if (this.checked) {
+
+            select.value = "";
+
+            select.disabled = true;
+
+        } else {
+
+            select.disabled = false;
+
+        }
+
+    });
+
+
+
+/* ======================================================
+   PUNTO 9
+   REGISTRAR PAGO
+====================================================== */
+
+document
+    .getElementById("formPago")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        ocultarMensaje("mensajePago");
+
+
+        const servicioId =
+            document.getElementById("servicioPago").value;
+
+
+        const monto =
+            document.getElementById("montoPago").value;
+
+
+        const ocasional =
+            document.getElementById("clienteOcasional").checked;
+
+
+        const clienteId =
+            ocasional
+                ? null
+                : document.getElementById("clientePago").value;
+
+
+        const metodo =
+            document.querySelector(
+                'input[name="metodoPago"]:checked'
+            ).value;
+
+
+        if (!servicioId) {
+
+            mostrarMensaje(
+                "mensajePago",
+                "Debes seleccionar un servicio.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!monto || Number(monto) <= 0) {
+
+            mostrarMensaje(
+                "mensajePago",
+                "El monto debe ser mayor a cero.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const datos = {
+
+            client_id:
+                clienteId
+                    ? Number(clienteId)
+                    : null,
+
+            service_id:
+                Number(servicioId),
+
+            amount:
+                Number(monto),
+
+            payment_method:
+                metodo
+
+        };
+
+
+        try {
+
+            const respuesta =
+                await fetch("/payments/", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(datos)
+
+                });
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se pudo registrar el pago."
+                );
+
+            }
+
+
+            mostrarMensaje(
+                "mensajePago",
+                "Pago registrado correctamente.",
+                "success"
+            );
+
+
+            document
+                .getElementById("formPago")
+                .reset();
+
+
+            document
+                .getElementById("clienteOcasional")
+                .checked = true;
+
+
+            document
+                .getElementById("clientePago")
+                .value = "";
+
+
+            document
+                .getElementById("clientePago")
+                .disabled = true;
+
+
+            document
+                .getElementById("montoPago")
+                .value = "";
+
+
+            await cargarPagos();
+
+            await cargarResumen();
+
+        }
+
+
+        catch (error) {
+
+            console.error(error);
+
+            mostrarMensaje(
+                "mensajePago",
+                error.message,
+                "error"
+            );
+
+        }
+
+    });
+
+
+
+/* ======================================================
+   PUNTO 10
+   CARGAR CLIENTES
+====================================================== */
+
+async function cargarClientes() {
+
+    const respuesta =
+        await fetch("/clients/");
+
+
+    if (!respuesta.ok) {
+
+        throw new Error(
+            "No se pudieron cargar los clientes."
+        );
+
+    }
+
+
+    clientes =
+        await respuesta.json();
+
+
+    const tabla =
+        document.getElementById("tablaClientes");
+
+
+    tabla.innerHTML = "";
+
+
+    clientes.forEach(function(cliente) {
+
+        const fila =
+            document.createElement("tr");
+
+
+        const id =
+            document.createElement("td");
+
+        id.textContent =
+            cliente.id;
+
+
+        const nombre =
+            document.createElement("td");
+
+        nombre.textContent =
+            cliente.name;
+
+
+        const telefono =
+            document.createElement("td");
+
+        telefono.textContent =
+            cliente.phone;
+
+
+        const email =
+            document.createElement("td");
+
+        email.textContent =
+            cliente.email || "";
+
+
+        const acciones =
+            document.createElement("td");
+
+
+        const editar =
+            document.createElement("button");
+
+        editar.textContent =
+            "Editar";
+
+        editar.className =
+            "btn-edit";
+
+
+        editar.onclick =
+            function() {
+
+                editarCliente(cliente);
+
+            };
+
+
+        const eliminar =
+            document.createElement("button");
+
+        eliminar.textContent =
+            "Eliminar";
+
+        eliminar.className =
+            "btn-danger";
+
+
+        eliminar.onclick =
+            function() {
+
+                eliminarCliente(cliente.id);
+
+            };
+
+
+        acciones.appendChild(editar);
+
+        acciones.appendChild(eliminar);
+
+
+        fila.appendChild(id);
+
+        fila.appendChild(nombre);
+
+        fila.appendChild(telefono);
+
+        fila.appendChild(email);
+
+        fila.appendChild(acciones);
+
+
+        tabla.appendChild(fila);
+
+    });
+
+
+    cargarClientesEnPago();
+
+    cargarClientesEnFiltro();
+
+}
+
+
+
+/* ======================================================
+   PUNTO 10
+   CREAR / EDITAR CLIENTE
+====================================================== */
+
+document
+    .getElementById("formCliente")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const id =
+            document.getElementById("clienteId").value;
+
+
+        const datos = {
+
+            name:
+                document.getElementById("clienteNombre").value.trim(),
+
+            phone:
+                document.getElementById("clienteTelefono").value.trim(),
+
+            email:
+                document.getElementById("clienteEmail").value.trim()
+                    || null
+
+        };
+
+
+        if (!datos.name || !datos.phone) {
+
+            mostrarMensaje(
+                "mensajeCliente",
+                "Nombre y teléfono son obligatorios.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const url =
+            id
+                ? `/clients/${id}`
+                : "/clients/";
+
+
+        const metodo =
+            id
+                ? "PUT"
+                : "POST";
+
+
+        try {
+
+            const respuesta =
+                await fetch(url, {
+
+                    method: metodo,
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(datos)
+
+                });
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se pudo guardar el cliente."
+                );
+
+            }
+
+
+            mostrarMensaje(
+                "mensajeCliente",
+                id
+                    ? "Cliente actualizado correctamente."
+                    : "Cliente registrado correctamente.",
+                "success"
+            );
+
+
+            cancelarEdicionCliente();
+
+
+            await cargarClientes();
+
+        }
+
+
+        catch (error) {
+
+            mostrarMensaje(
+                "mensajeCliente",
+                error.message,
+                "error"
+            );
+
+        }
+
+    });
+
+
+
+/* ======================================================
+   EDITAR CLIENTE
+====================================================== */
+
+function editarCliente(cliente) {
+
+    document
+        .getElementById("clienteId")
+        .value =
+        cliente.id;
+
+
+    document
+        .getElementById("clienteNombre")
+        .value =
+        cliente.name;
+
+
+    document
+        .getElementById("clienteTelefono")
+        .value =
+        cliente.phone;
+
+
+    document
+        .getElementById("clienteEmail")
+        .value =
+        cliente.email || "";
+
+
+    document
+        .getElementById("btnGuardarCliente")
+        .textContent =
+        "Actualizar cliente";
+
+
+    document
+        .getElementById("btnCancelarCliente")
+        .style.display =
+        "inline-block";
+
+
+    window.scrollTo({
+        top:
+            document.getElementById("formCliente")
+                .offsetTop - 20,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* ======================================================
+   CANCELAR EDICIÓN CLIENTE
+====================================================== */
+
+function cancelarEdicionCliente() {
+
+    document
+        .getElementById("formCliente")
+        .reset();
+
+
+    document
+        .getElementById("clienteId")
+        .value = "";
+
+
+    document
+        .getElementById("btnGuardarCliente")
+        .textContent =
+        "Guardar cliente";
+
+
+    document
+        .getElementById("btnCancelarCliente")
+        .style.display =
+        "none";
+
+}
+
+
+document
+    .getElementById("btnCancelarCliente")
+    .addEventListener(
+        "click",
+        cancelarEdicionCliente
+    );
+
+
+
+/* ======================================================
+   ELIMINAR CLIENTE
+====================================================== */
+
+async function eliminarCliente(id) {
+
+    const confirmar =
+        confirm(
+            "¿Seguro que deseas eliminar este cliente?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                `/clients/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudo eliminar el cliente."
+            );
+
+        }
+
+
+        await cargarClientes();
+
+
+        mostrarMensaje(
+            "mensajeCliente",
+            "Cliente eliminado correctamente.",
+            "success"
+        );
+
+    }
+
+
+    catch (error) {
+
+        mostrarMensaje(
+            "mensajeCliente",
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* ======================================================
+   PUNTO 11
+   CARGAR SERVICIOS
+====================================================== */
+
+async function cargarServicios() {
+
+    const respuesta =
+        await fetch("/services/");
+
+
+    if (!respuesta.ok) {
+
+        throw new Error(
+            "No se pudieron cargar los servicios."
+        );
+
+    }
+
+
+    servicios =
+        await respuesta.json();
+
+
+    const tabla =
+        document.getElementById("tablaServicios");
+
+
+    tabla.innerHTML = "";
+
+
+    servicios.forEach(function(servicio) {
+
+        const fila =
+            document.createElement("tr");
+
+
+        const id =
+            document.createElement("td");
+
+        id.textContent =
+            servicio.id;
+
+
+        const nombre =
+            document.createElement("td");
+
+        nombre.textContent =
+            servicio.name;
+
+
+        const precio =
+            document.createElement("td");
+
+        precio.textContent =
+            dinero(servicio.price);
+
+
+        const estado =
+            document.createElement("td");
+
+        estado.textContent =
+            servicio.active === false
+                ? "Inactivo"
+                : "Activo";
+
+
+        const acciones =
+            document.createElement("td");
+
+
+        const editar =
+            document.createElement("button");
+
+        editar.textContent =
+            "Editar";
+
+        editar.className =
+            "btn-edit";
+
+
+        editar.onclick =
+            function() {
+
+                editarServicio(servicio);
+
+            };
+
+
+        const eliminar =
+            document.createElement("button");
+
+        eliminar.textContent =
+            "Eliminar";
+
+        eliminar.className =
+            "btn-danger";
+
+
+        eliminar.onclick =
+            function() {
+
+                eliminarServicio(servicio.id);
+
+            };
+
+
+        acciones.appendChild(editar);
+
+        acciones.appendChild(eliminar);
+
+
+        fila.appendChild(id);
+
+        fila.appendChild(nombre);
+
+        fila.appendChild(precio);
+
+        fila.appendChild(estado);
+
+        fila.appendChild(acciones);
+
+
+        tabla.appendChild(fila);
+
+    });
+
+
+    cargarServiciosEnPago();
+
+}
+
+
+
+/* ======================================================
+   PUNTO 11
+   CREAR / EDITAR SERVICIO
+====================================================== */
+
+document
+    .getElementById("formServicio")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const id =
+            document.getElementById("servicioId").value;
+
+
+        const nombre =
+            document
+                .getElementById("servicioNombre")
+                .value
+                .trim();
+
+
+        const precio =
+            document
+                .getElementById("servicioPrecio")
+                .value;
+
+
+        if (!nombre) {
+
+            mostrarMensaje(
+                "mensajeServicio",
+                "El nombre del servicio es obligatorio.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!precio || Number(precio) <= 0) {
+
+            mostrarMensaje(
+                "mensajeServicio",
+                "El precio debe ser mayor a cero.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const datos = {
+
+            name: nombre,
+
+            price: Number(precio)
+
+        };
+
+
+        const url =
+            id
+                ? `/services/${id}`
+                : "/services/";
+
+
+        const metodo =
+            id
+                ? "PUT"
+                : "POST";
+
+
+        try {
+
+            const respuesta =
+                await fetch(url, {
+
+                    method: metodo,
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(datos)
+
+                });
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se pudo guardar el servicio."
+                );
+
+            }
+
+
+            mostrarMensaje(
+                "mensajeServicio",
+                id
+                    ? "Servicio actualizado correctamente."
+                    : "Servicio registrado correctamente.",
+                "success"
+            );
+
+
+            cancelarEdicionServicio();
+
+
+            await cargarServicios();
+
+        }
+
+
+        catch (error) {
+
+            mostrarMensaje(
+                "mensajeServicio",
+                error.message,
+                "error"
+            );
+
+        }
+
+    });
+
+
+
+/* ======================================================
+   EDITAR SERVICIO
+====================================================== */
+
+function editarServicio(servicio) {
+
+    document
+        .getElementById("servicioId")
+        .value =
+        servicio.id;
+
+
+    document
+        .getElementById("servicioNombre")
+        .value =
+        servicio.name;
+
+
+    document
+        .getElementById("servicioPrecio")
+        .value =
+        servicio.price;
+
+
+    document
+        .getElementById("btnGuardarServicio")
+        .textContent =
+        "Actualizar servicio";
+
+
+    document
+        .getElementById("btnCancelarServicio")
+        .style.display =
+        "inline-block";
+
+
+    window.scrollTo({
+        top:
+            document.getElementById("formServicio")
+                .offsetTop - 20,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* ======================================================
+   CANCELAR EDICIÓN SERVICIO
+====================================================== */
+
+function cancelarEdicionServicio() {
+
+    document
+        .getElementById("formServicio")
+        .reset();
+
+
+    document
+        .getElementById("servicioId")
+        .value = "";
+
+
+    document
+        .getElementById("btnGuardarServicio")
+        .textContent =
+        "Guardar servicio";
+
+
+    document
+        .getElementById("btnCancelarServicio")
+        .style.display =
+        "none";
+
+}
+
+
+document
+    .getElementById("btnCancelarServicio")
+    .addEventListener(
+        "click",
+        cancelarEdicionServicio
+    );
+
+
+
+/* ======================================================
+   ELIMINAR SERVICIO
+====================================================== */
+
+async function eliminarServicio(id) {
+
+    const confirmar =
+        confirm(
+            "¿Seguro que deseas eliminar este servicio?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                `/services/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudo eliminar el servicio."
+            );
+
+        }
+
+
+        await cargarServicios();
+
+
+        mostrarMensaje(
+            "mensajeServicio",
+            "Servicio eliminado correctamente.",
+            "success"
+        );
+
+    }
+
+
+    catch (error) {
+
+        mostrarMensaje(
+            "mensajeServicio",
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* ======================================================
+   PUNTO 12
+   CARGAR PAGOS
+====================================================== */
+
+async function cargarPagos() {
+
+    const respuesta =
+        await fetch("/payments/");
+
+
+    if (!respuesta.ok) {
+
+        throw new Error(
+            "No se pudieron cargar los pagos."
+        );
+
+    }
+
+
+    pagos =
+        await respuesta.json();
+
+
+    aplicarFiltros();
+
+}
+
+
+
+/* ======================================================
+   PUNTO 12
+   CARGAR CLIENTES EN FILTRO
+====================================================== */
+
+function cargarClientesEnFiltro() {
+
+    const select =
+        document.getElementById("filtroCliente");
+
+
+    select.innerHTML = "";
+
+
+    const todos =
+        document.createElement("option");
+
+    todos.value = "";
+
+    todos.textContent =
+        "Todos los clientes";
+
+    select.appendChild(todos);
+
+
+    clientes.forEach(function(cliente) {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            cliente.name;
+
+        option.textContent =
+            cliente.name;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+/* ======================================================
+   PUNTO 12
+   APLICAR FILTROS
+====================================================== */
+
+function aplicarFiltros() {
+
+    const texto =
+        document
+            .getElementById("buscarPago")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const clienteFiltro =
+        document
+            .getElementById("filtroCliente")
+            .value;
+
+
+    const metodoFiltro =
+        document
+            .getElementById("filtroMetodo")
+            .value;
+
+
+    const desde =
+        document
+            .getElementById("fechaDesde")
+            .value;
+
+
+    const hasta =
+        document
+            .getElementById("fechaHasta")
+            .value;
+
+
+    const filtrados =
+        pagos.filter(function(pago) {
+
+
+            const cliente =
+                String(
+                    pago.cliente || ""
+                );
+
+
+            const servicio =
+                String(
+                    pago.servicio || ""
+                );
+
+
+            const fecha =
+                new Date(pago.fecha);
+
+
+            const fechaTexto =
+                fecha
+                    .toISOString()
+                    .split("T")[0];
+
+
+            const coincideTexto =
+
+                !texto ||
+
+                cliente
+                    .toLowerCase()
+                    .includes(texto) ||
+
+                servicio
+                    .toLowerCase()
+                    .includes(texto);
+
+
+            const coincideCliente =
+
+                !clienteFiltro ||
+
+                cliente === clienteFiltro;
+
+
+            const coincideMetodo =
+
+                !metodoFiltro ||
+
+                pago.metodo_pago === metodoFiltro;
+
+
+            const coincideDesde =
+
+                !desde ||
+
+                fechaTexto >= desde;
+
+
+            const coincideHasta =
+
+                !hasta ||
+
+                fechaTexto <= hasta;
+
+
+            return (
+
+                coincideTexto &&
+
+                coincideCliente &&
+
+                coincideMetodo &&
+
+                coincideDesde &&
+
+                coincideHasta
+
+            );
+
+        });
+
+
+    mostrarPagos(filtrados);
+
+}
+
+
+
+/* ======================================================
+   MOSTRAR PAGOS
+====================================================== */
+
+function mostrarPagos(lista) {
+
+    const tabla =
+        document.getElementById("tablaPagos");
+
+
+    tabla.innerHTML = "";
+
+
+    let total = 0;
+
+
+    lista
+        .slice()
+        .sort(
+            function(a, b) {
+
+                return new Date(b.fecha)
+                    -
+                    new Date(a.fecha);
+
+            }
+        )
+        .forEach(function(pago) {
+
+
+            total +=
+                Number(pago.monto || 0);
+
+
+            const fila =
+                document.createElement("tr");
+
+
+            const id =
+                document.createElement("td");
+
+            id.textContent =
+                pago.id;
+
+
+            const fecha =
+                document.createElement("td");
+
+
+            const fechaObjeto =
+                new Date(pago.fecha);
+
+
+            fecha.textContent =
+                fechaObjeto.toLocaleString(
+                    "es-BO"
+                );
+
+
+            const cliente =
+                document.createElement("td");
+
+            cliente.textContent =
+                pago.cliente;
+
+
+            const servicio =
+                document.createElement("td");
+
+            servicio.textContent =
+                pago.servicio;
+
+
+            const monto =
+                document.createElement("td");
+
+            monto.textContent =
+                dinero(pago.monto);
+
+
+            const metodo =
+                document.createElement("td");
+
+            metodo.textContent =
+                pago.metodo_pago;
+
+
+            fila.appendChild(id);
+
+            fila.appendChild(fecha);
+
+            fila.appendChild(cliente);
+
+            fila.appendChild(servicio);
+
+            fila.appendChild(monto);
+
+            fila.appendChild(metodo);
+
+
+            tabla.appendChild(fila);
+
+        });
+
+
+    document
+        .getElementById("totalFiltrado")
+        .textContent =
+        "Total: " + dinero(total);
+
+}
+
+
+
+/* ======================================================
+   EVENTOS DE FILTROS
+====================================================== */
+
+document
+    .getElementById("buscarPago")
+    .addEventListener(
+        "input",
+        aplicarFiltros
+    );
+
+
+document
+    .getElementById("filtroCliente")
+    .addEventListener(
+        "change",
+        aplicarFiltros
+    );
+
+
+document
+    .getElementById("filtroMetodo")
+    .addEventListener(
+        "change",
+        aplicarFiltros
+    );
+
+
+document
+    .getElementById("fechaDesde")
+    .addEventListener(
+        "change",
+        aplicarFiltros
+    );
+
+
+document
+    .getElementById("fechaHasta")
+    .addEventListener(
+        "change",
+        aplicarFiltros
+    );
+
+
+
+/* ======================================================
+   LIMPIAR FILTROS
+====================================================== */
+
+function limpiarFiltros() {
+
+    document
+        .getElementById("buscarPago")
+        .value = "";
+
+
+    document
+        .getElementById("filtroCliente")
+        .value = "";
+
+
+    document
+        .getElementById("filtroMetodo")
+        .value = "";
+
+
+    document
+        .getElementById("fechaDesde")
+        .value = "";
+
+
+    document
+        .getElementById("fechaHasta")
+        .value = "";
+
+
+    aplicarFiltros();
+
+}
+
+
+
+/* ======================================================
+   RESUMEN
+====================================================== */
+
+async function cargarResumen() {
+
+    const respuesta =
+        await fetch("/payments/summary");
+
+
+    if (!respuesta.ok) {
+
+        throw new Error(
+            "No se pudo cargar el resumen."
+        );
+
+    }
+
+
+    const datos =
+        await respuesta.json();
+
+
+    document
+        .getElementById("totalHoy")
+        .textContent =
+        dinero(datos.total_hoy);
+
+
+    document
+        .getElementById("efectivoHoy")
+        .textContent =
+        dinero(datos.efectivo_hoy);
+
+
+    document
+        .getElementById("qrHoy")
+        .textContent =
+        dinero(datos.qr_hoy);
+
+
+    document
+        .getElementById("totalSemana")
+        .textContent =
+        dinero(datos.total_semana);
+
+
+    document
+        .getElementById("totalMes")
+        .textContent =
+        dinero(datos.total_mes);
+
+}
+
+
+
+/* ======================================================
+   INICIALIZAR TODO
+====================================================== */
+
+async function iniciarSistema() {
+
+    try {
+
+        await cargarClientes();
+
+        await cargarServicios();
+
+        await cargarPagos();
+
+        await cargarResumen();
+
+
+        document
+            .getElementById("clientePago")
+            .disabled = true;
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "No se pudo cargar completamente el sistema. " +
+            "Revisa la terminal de Python."
+        );
+
+    }
+
+}
+
+
+iniciarSistema();
+
+
+
+/* ======================================================
+   ACTUALIZAR DATOS CADA 30 SEGUNDOS
+====================================================== */
+
+setInterval(
+    async function() {
+
+        try {
+
+            await cargarPagos();
+
+            await cargarResumen();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+    },
+    30000
+);
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+
+.env
+.env.*
+
+salon.db
+salon_backup_antes_postgresql.db
+
+*.sqlite
+*.sqlite3
+
+.vscode/
