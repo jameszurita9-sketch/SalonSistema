@@ -7,19 +7,45 @@ from auth.security import verify_password, hash_password
 
 router = APIRouter(prefix="/auth", tags=["Autenticación"])
 
-
 @router.post("/login")
 def login(datos: LoginRequest, request: Request, db=Depends(get_db)):
+    from database import engine
+
+    print("LOGIN_DIAG: base de datos =", engine.url.database)
+    print("LOGIN_DIAG: servidor =", engine.url.host)
+    print("LOGIN_DIAG: usuario recibido =", repr(datos.username))
+
     usuario = db.query(User).filter(User.username == datos.username).first()
 
+    print("LOGIN_DIAG: usuario encontrado =", usuario is not None)
+
     if usuario is None:
-        raise HTTPException(status_code=401, detail="Usuario o contraseña incorrectos")
+        raise HTTPException(
+            status_code=401,
+            detail="Usuario o contraseña incorrectos"
+        )
+
+    print("LOGIN_DIAG: usuario activo =", usuario.active)
+    print("LOGIN_DIAG: longitud del hash =", len(usuario.password_hash or ""))
 
     if not usuario.active:
-        raise HTTPException(status_code=403, detail="Usuario desactivado")
+        raise HTTPException(
+            status_code=403,
+            detail="Usuario desactivado"
+        )
 
-    if not verify_password(datos.password, usuario.password_hash):
-        raise HTTPException(status_code=401, detail="Usuario o contraseña incorrectos")
+    contrasena_correcta = verify_password(
+        datos.password,
+        usuario.password_hash
+    )
+
+    print("LOGIN_DIAG: contraseña coincide =", contrasena_correcta)
+
+    if not contrasena_correcta:
+        raise HTTPException(
+            status_code=401,
+            detail="Usuario o contraseña incorrectos"
+        )
 
     request.session["user_id"] = usuario.id
     request.session["username"] = usuario.username
@@ -28,7 +54,6 @@ def login(datos: LoginRequest, request: Request, db=Depends(get_db)):
         "mensaje": "Inicio de sesión correcto",
         "username": usuario.username
     }
-
 
 @router.post("/change-password")
 def cambiar_contrasena(
@@ -42,6 +67,7 @@ def cambiar_contrasena(
         raise HTTPException(status_code=401, detail="Debe iniciar sesión.")
 
     usuario = db.query(User).filter(User.id == user_id).first()
+
 
     if usuario is None or not usuario.active:
         request.session.clear()
