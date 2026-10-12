@@ -229,3 +229,35 @@ def obtener_pago(
 
         "fecha": pago.date
     }
+@router.delete("/{payment_id}")
+def eliminar_pago(
+    payment_id: int,
+    db=Depends(get_db)
+):
+    pago = (
+        db.query(Payment)
+        .filter(Payment.id == payment_id)
+        .first()
+    )
+
+    if pago is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Pago no encontrado"
+        )
+
+    try:
+        db.delete(pago)
+        db.commit()
+
+    except SQLAlchemyError:
+        db.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="No se pudo eliminar el pago"
+        )
+
+    return {
+        "mensaje": "Pago eliminado correctamente",
+        "id": payment_id
+    }
